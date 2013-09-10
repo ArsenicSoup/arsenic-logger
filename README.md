@@ -11,10 +11,12 @@ Output to a file
 
 ## Installation
 
-Just copy the Logger file into your project, and then use;
+```
+npm install arsenic-logger
+```
 
 ```js
-Logger = require('./Logger.js');
+Logger = require('arsenic-logger');
 ```
 ## Screen Shot
 
