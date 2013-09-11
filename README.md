@@ -20,7 +20,7 @@ Logger = require('arsenic-logger');
 ```
 ## Screen Shot
 
-![](https://github.com/ArsenicSoup/node-logger/raw/master/logger_screenshot.png)
+![](https://github.com/ArsenicSoup/arsenic-logger/raw/master/logger_screenshot.png)
 
 
 ## Usage
