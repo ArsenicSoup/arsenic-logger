@@ -3,7 +3,7 @@
 ## Summary
 
 Simple, easy to read log statements with stack trace in Node.js. There are a few other great loggers out there for Node.js, the inspiration to create our own
-was mainly drive by the need for both a stack trace and a colorized and easy to read output.
+was mainly driven by the need for both a stack trace and a colorized and easy to read output.
 
 ## Coming Soon
 
@@ -20,7 +20,7 @@ Logger = require('arsenic-logger');
 ```
 ## Screen Shot
 
-![](https://github.com/adastra/node-logger/raw/master/logger_screenshot.png)
+![](https://github.com/ArsenicSoup/node-logger/raw/master/logger_screenshot.png)
 
 
 ## Usage
