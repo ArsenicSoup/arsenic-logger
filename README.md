@@ -7,7 +7,7 @@ was mainly drive by the need for both a stack trace and a colorized and easy to 
 
 ## Coming Soon
 
-Output to a file
+Output to a remote logging service hosted by arsenic soup
 
 ## Installation
 
