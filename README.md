@@ -69,6 +69,17 @@ Logger.info(someObject);
 // A fatal call, that will call process.exit
 Logger.fatal("fatal test");
 
+// Feed uncaught exceptions to the Logger
+Logger.catchExceptions();
+	
+function badFunc(){
+	throw "This is an exception!";	
+}
+
+badFunc();
+
+Logger.debug(variableThatDoesntExist);
+
 ```
 
 ## Requirements
