@@ -1,122 +1,50 @@
-# node-logger
+Node Boilerplate Version 2
+==========================
+*Requires Node v0.6.6 (or newer)*
+node-boilerplate takes html-boilerplate, express, connect, jade and Socket.IO and organizes them into a ready to use website project. It's a fast way to get working on your Node website without having to worry about the setup. It takes care of all the boring parts, like setting up your views, 404 page, 500 page, getting the modules organized, etc... 
 
-## Summary
+Node Boilerplate has 4 goals:
 
-Simple, easy to read log statements with stack trace in Node.js. There are a few other great loggers out there for Node.js, the inspiration to create our own
-was mainly driven by the need for both a stack trace and a colorized and easy to read output.
+1. To end the repetition involved with starting a new Node website project
+2. To never install anything outside of the project directory (For easier production deployment)
+3. To make it easy to install additional modules within the project directory
+4. To enable easy upgrade or freezing of project dependencies  
+(These goals are much easier to meet now that node includes the node_modules convention)
 
-## Coming Soon
-
-Output to a remote logging service hosted by arsenic soup
-
-## Installation
-
-```
-npm install arsenic-logger
-```
-
-```js
-Logger = require('arsenic-logger');
-```
-## Screen Shot
-
-![](https://github.com/ArsenicSoup/arsenic-logger/raw/master/logger_screenshot.png)
+To start a project:
+		
+		git clone git://github.com/robrighter/node-boilerplate.git mynewproject
+		cd mynewproject
+		./initproject.sh
+This will copy down all of the boilerplate files, organize them appropriately and init a fresh new git repository within which you can build your next big thing.
 
 
-## Usage
+To run the boilerplate template app:
 
-There are 5 levels of logging
+		node server.js
 
-```js 
-log, debug, info, warn, error, fatal
-```
+Go to http://0.0.0.0:8081 and click on the send message link to see socket.io in action.
 
-Here is an example of how to use the logger.
 
-```js
+Additional Features:
 
-Logger = require('./Logger.js');
+1. Creates a package.json file consistent with associated best practices (http://blog.nodejitsu.com/package-dependencies-done-right)
+2. Adds .gitignore for the node_modules directory
+3. Includes 404 page and associated route
+4. Includes 500 page
 
-Logger.setLevel('debug');
+To add additional modules:
 
-Logger.debug("debug test");
-Logger.info("info test");
-Logger.warn("info test");
-Logger.error("errortest");
+Update the package.json file to include new module dependencies and run 'npm install'.
 
-var someObject = new Object();
-someObject.name = 'testing';
-someObject.data = [5,6,7,8,9];
-someObject.date = new Date();
+**If you have a different set of default modules that you like to use, the structure is setup such that you can fork the project and replace the module dependencies outlined in the ./templates/apps/package.json file to best fit your needs and the initproject.sh script will initialize projects with your new set of modules.**
 
-Logger.debug("This is an object... ", someObject);
+Deployment
+===============
 
-function somefunc(){
-	Logger.debug("testing inside a function");	
-}
+node-boilerplate is setup to be easily deployed on a Joyent Node SmartMachine. This means that:
 
-var someclass = {
-	test:function(){
-		Logger.debug("Testing inside a class");
-	}
-}
+1. The version of Node is defined in config.json and in package.json
+2. The main script to run is server.js
+3. The web server port is pulled from process.env.PORT 
 
-somefunc();
-someclass.test();
-
-Logger.info(someObject);
-
-// A fatal call, that will call process.exit
-Logger.fatal("fatal test");
-
-// Feed uncaught exceptions to the Logger
-Logger.catchExceptions();
-	
-function badFunc(){
-	throw "This is an exception!";	
-}
-
-badFunc();
-
-Logger.debug(variableThatDoesntExist);
-
-```
-
-## Requirements
-
-REquires the excellent callsite module (https://github.com/visionmedia/callsite)
-
-npm install callsite
-
-And also the Path module (http://nodejs.org/api/path.html)
-
-npm install path
-
-## Advanced
-
-For a more full featured logger, check out [tracer](https://github.com/baryon/tracer).
-
-## License 
-
-(The MIT License)
-
-Copyright (C) 2012 by Ad Astra Systems, LLC;
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
