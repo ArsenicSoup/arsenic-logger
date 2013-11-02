@@ -1,10 +1,11 @@
 {
   "name": "arsenic-logger",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Simple, easy to read log statements with stack trace in Node.js",
   "main": "example.js",
   "dependencies": {
-    "callsite": "1.0.0"
+    "callsite": "1.0.0",
+    "usage": "x"
   },
   "repository": {
     "type": "git",
