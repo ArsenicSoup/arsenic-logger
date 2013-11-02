@@ -96,6 +96,13 @@ Then simply setup the Logger like so;
 Logger.useArsenicLogger('YOUR-API-KEY');
 ```
 
+You can also specify a custom tag to assign to all subsequent logging calls to help with searching and categorizing on 
+the ArsenicLogger service, e.g.;
+
+```js
+Logger.useArsenicLogger('YOUR-API-KEY', 'MY-TAG');
+```
+
 ## Requirements
 
 Requires the excellent callsite module (https://github.com/visionmedia/callsite)
