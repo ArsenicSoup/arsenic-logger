@@ -2,12 +2,7 @@
 
 ## Summary
 
-Simple, easy to read log statements with stack trace in Node.js. There are a few other great loggers out there for Node.js, the inspiration to create our own
-was mainly driven by the need for both a stack trace and a colorized and easy to read output.
-
-## Coming Soon
-
-Output to a remote logging service hosted by arsenic soup
+Simple, easy to read log statements with stack trace in Node.js. There are a few other great loggers out there for Node.js, the inspiration to create our own was mainly driven by the need for both a stack trace and a colorized and easy to read output.
 
 ## Installation
 
@@ -18,6 +13,7 @@ npm install arsenic-logger
 ```js
 Logger = require('arsenic-logger');
 ```
+
 ## Screen Shot
 
 ![](https://github.com/ArsenicSoup/arsenic-logger/raw/master/logger_screenshot.png)
@@ -35,7 +31,7 @@ Here is an example of how to use the logger.
 
 ```js
 
-Logger = require('./Logger.js');
+Logger = require('arsenic-logger');
 
 Logger.setLevel('debug');
 
@@ -84,11 +80,21 @@ Logger.debug(variableThatDoesntExist);
 
 ## Remote Logging
 
-The Logger now supports the cloud logging service offered by ArsenicSoup. To use this service first 
-create an account at ArsenicLogger (http://logger.arsenicsoup.com).
+### Loggly
 
-Once you have an account, you will be given a API key. With this, you can now setup this Logger class
-to send log reports from your server to the ArsenicLogger service. 
+The Logger now supports [Loggly](https://www.loggly.com/). It makes use of [node-loggly](https://github.com/nodejitsu/node-loggly) under-the-hood. To use this, call;
+
+```js
+Logger.useLoggly('token', 'subdomain','username','password');
+```
+
+Then all calls will be sent to your loggly account!
+
+### ArsenicLogger
+
+The Logger supports the cloud logging service offered by ArsenicSoup. To use this service first create an account at ArsenicLogger (http://logger.arsenicsoup.com).
+
+Once you have an account, you will be given a API key. With this, you can now setup this Logger class to send log reports from your server to the ArsenicLogger service. 
 
 Then simply setup the Logger like so;
 
@@ -116,6 +122,18 @@ npm install path
 ## Advanced
 
 For a more full featured logger, check out [tracer](https://github.com/baryon/tracer).
+
+## Donate
+
+If you like this, and use it, please consider donating to help support future development.
+
+<a class="coinbase-button" data-code="1f955f58582ddd191e84a8bb8fcd7a77" data-button-style="donation_small" href="https://coinbase.com/checkouts/1f955f58582ddd191e84a8bb8fcd7a77">Donate Bitcoins</a><script src="https://coinbase.com/assets/button.js" type="text/javascript"></script>
+
+## Suggestions
+
+Feel free to contact me at mike@arsenicsoup.com if you want to help or have suggestions.
+
+Thanks!
 
 ## License 
 
