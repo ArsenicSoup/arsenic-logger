@@ -109,6 +109,34 @@ the ArsenicLogger service, e.g.;
 Logger.useArsenicLogger('YOUR-API-KEY', 'MY-TAG');
 ```
 
+## Memory/CPU Usage
+
+The Logger can echo current memory and cpu usage information to the command line using the following commands, which can be combined. **Note:** the arsenic logger service automatically is sent this information.
+
+### Memory Usage
+
+```js
+Logger.echoMemoryUsage()
+```
+
+This will add the amount of memory used by the heap *at the time an entry was logged*. For example, the follow result shows the process was consuming 3.16GB of heap space when the `Logger.error("errortest")` method was called.
+
+```sh
+[3.16GB  error] errortest  {from line 14 of test.js....}
+```
+
+### CPU Usage
+
+```js
+Logger.echoCPUUsage()
+```
+
+In a similar fashion, the current 15 minute average CPU usage is sent to the console, for example;
+
+```sh
+[1.43%  error] errortest  {from line 14 of test.js,......}
+```
+
 ## Requirements
 
 Requires the excellent callsite module (https://github.com/visionmedia/callsite)
