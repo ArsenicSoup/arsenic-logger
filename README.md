@@ -78,7 +78,7 @@ Logger.debug(variableThatDoesntExist);
 
 ```
 
-## Tagging & Advanced Options
+## [NEW] Tagging & Advanced Options
 
 You can add a custom tag and other advanced options by using the 'advanced' version of the logging commands;
 
