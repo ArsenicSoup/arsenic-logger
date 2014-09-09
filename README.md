@@ -78,6 +78,57 @@ Logger.debug(variableThatDoesntExist);
 
 ```
 
+## Tagging & Advanced Options
+
+You can add a custom tag and other advanced options by using the 'advanced' version of the logging commands;
+
+```js
+    Logger.debugX('opts', 'args');
+    Logger.warnX(('opts', 'args');
+    Logger.infoX(('opts', 'args');
+    Logger.errorX(('opts', 'args');
+    Logger.fatalX(('opts', 'args');
+```
+ 
+Where `opts` includes custom options, which for now only includes tags. The other `args` are the same as the basic version of the Logging commands. 
+
+`opts` supports usage as an object, e.g. {tag:'TestTag'} or as a string (where the value of the string is assumed to be a tag). The object form is reserved for advanced future usage.
+
+Here is an example;
+
+```js
+var someObject = new Object();
+someObject.name = 'fred';
+someObject.data = [5,6,7,8,9];
+someObject.date = new Date();
+
+Logger.debugX("TestTag", "This is an object, but using a custom tag... ", someObject);
+```
+
+You can now filter output based on log level and also these advanced values using `setFilter`, for example;
+
+```js
+Logger.setLevel('debug');
+Logger.setFilter({tag:"TestTag"});
+
+var someObject = new Object();
+someObject.name = 'fred';
+someObject.data = [5,6,7,8,9];
+someObject.date = new Date();
+
+var anotherObject = new Object();
+anotherObject.name = 'bob';
+anotherObject.data = [2,7,8];
+
+Logger.debug("This is an object... ", someObject, anotherObject);
+
+Logger.debugX("TestTag", "This is an object, but using a custom tag... ", someObject);
+```
+
+Here, because the level was set to `debug` and a the filter was set to the tag "TestTag" the only output from this would be from the 2nd debug statement. 
+
+This can be particulalry useful for large projects where you want to only see the logs from a specific section of code at a time.
+
 ## Remote Logging
 
 ### Loggly
