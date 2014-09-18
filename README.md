@@ -78,21 +78,45 @@ Logger.debug(variableThatDoesntExist);
 
 ```
 
+## [NEW] setFilter Filtering Logs
+
+The method `setFilter` can be used to give fine control over what logs are sent to the console. This supports function names, filenames and tags.
+
+```js
+Logger.setFilter({functions:"somefunc"})
+Logger.setFilter({files:"test.js"})
+Logger.setFilter({tags:"my-tag"})
+```
+
+These can be combined, such as;
+
+```js
+// Echo ONLY logs that match the filename and tag
+Logger.setFilter({files:"test.js", tags: "my-tag"})
+```
+
+Also, you can pass an array or a single string into any of these options. In that case, the effect will be an OR, e.g.
+
+```js
+// Echo logs that have the tag my-tag or my-other-tag
+Logger.setFilter({tags: ["my-tag", "my-other-tag"]})
+```
+
 ## [NEW] Tagging & Advanced Options
 
 You can add a custom tag and other advanced options by using the 'advanced' version of the logging commands;
 
 ```js
-    Logger.debugX('opts', 'args');
-    Logger.warnX(('opts', 'args');
-    Logger.infoX(('opts', 'args');
-    Logger.errorX(('opts', 'args');
-    Logger.fatalX(('opts', 'args');
+    Logger.debugX('tags', 'args');
+    Logger.warnX('tags', 'args');
+    Logger.infoX('tags', 'args');
+    Logger.errorX('tags', 'args');
+    Logger.fatalX('tags', 'args');
 ```
  
-Where `opts` includes custom options, which for now only includes tags. The other `args` are the same as the basic version of the Logging commands. 
+Where `tags` includes custom tags. The other `args` are the same as the basic version of the Logging commands. 
 
-`opts` supports usage as an object, e.g. {tag:'TestTag'} or as a string (where the value of the string is assumed to be a tag). The object form is reserved for advanced future usage.
+`tags` can be either a string, or an array of strings. e.g. ```'TestTag'``` or ```['This','Or','That']``` where it will match on any of the tags in the array.
 
 Here is an example;
 
@@ -109,7 +133,7 @@ You can now filter output based on log level and also these advanced values usin
 
 ```js
 Logger.setLevel('debug');
-Logger.setFilter({tag:"TestTag"});
+Logger.setFilter({tags:"TestTag"});
 
 var someObject = new Object();
 someObject.name = 'fred';
