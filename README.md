@@ -78,7 +78,51 @@ Logger.debug(variableThatDoesntExist);
 
 ```
 
-## [NEW] setFilter Filtering Logs
+## [NEW] Timestamps
+
+The method, `setTimestamp` turns time stamps on for the logger
+
+### Turn on time stamps
+
+You can turn on timestamps using the following;
+
+```js
+// Turn timestamps on
+Logger.echoTimestamps(true);
+
+// Example output
+// [Tue Oct 9:40:24 2014] testing inside a function  {from line 35 of test.js ...
+
+// Turn time stamps off
+Logger.echoTimestamps(false);
+```
+
+### Set the time format
+
+You can set the timestamp format using the following command. Internally the Logger uses the [moment](http://momentjs.com/) library and so supports any format supported by moment, you can see the supported formats [here](http://momentjs.com/docs/#/displaying/format/).
+
+As a convenience, this also turns timestamps on, so no need to call `echoTimestaps(true)`.
+
+```js
+// Set timestamp format
+Logger.setTimestampFormat('ddd, hA');
+
+// Example output 
+//[Tue, 9AM] [debug] testing inside a function  {from line 36 of test.js ...
+```
+
+### Set the time locale
+
+The Logger supports any localed support by [moment](http://momentjs.com/), for example 'fr'.
+
+```js
+Logger.setLocale('fr');
+
+// Example output
+// [mar. oct. 10:01:24 2014] [debug] testing inside a function  {from line 37 of test.js ...
+```
+
+## setFilter Filtering Logs
 
 The method `setFilter` can be used to give fine control over what logs are sent to the console. This supports function names, filenames and tags.
 
@@ -102,7 +146,7 @@ Also, you can pass an array or a single string into any of these options. In tha
 Logger.setFilter({tags: ["my-tag", "my-other-tag"]})
 ```
 
-## [NEW] Tagging & Advanced Options
+## Tagging
 
 You can add a custom tag and other advanced options by using the 'advanced' version of the logging commands;
 

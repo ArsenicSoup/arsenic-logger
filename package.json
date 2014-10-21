@@ -1,13 +1,14 @@
 {
   "name": "arsenic-logger",
-  "version": "0.3.6",
+  "version": "0.3.9",
   "description": "Simple, easy to read log statements with stack trace in Node.js. Now supports the ArsenicLogger cloud logging service.",
   "main": "index.js",
   "dependencies": {
     "callsite": "1.0.0",
-    "needle" : "x",
-    "loggly" : "x",
-    "lodash" : "x"
+    "needle": "x",
+    "loggly": "x",
+    "lodash": "x",
+    "moment": "^2.8.3"
   },
   "repository": {
     "type": "git",
