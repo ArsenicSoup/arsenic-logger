@@ -1,4 +1,4 @@
-# node-logger
+# ArsenicLogger: Simple & Powerful logger with stack trace
 
 ## Summary
 
@@ -10,119 +10,57 @@ Simple, easy to read log statements with stack trace in Node.js. There are a few
 npm install arsenic-logger
 ```
 
+**UPGRADING FROM v0.3 to v0.4**
+
+Note that v0.4 contains breaking changes over prior versions - the way the Logger is setup has changed. See basic usage below.
+
+## Basic Usage
+
 ```js
-Logger = require('arsenic-logger');
+
+// Get a default logger instance
+var ArsenicLogger = require('arsenic-logger');
+
+// Create a Logger instance and pass in configuration parameters
+var Logger = new ArsenicLogger({
+    logTag:'MY-TAG',
+    level: 'debug'
+});
+
+// Start using
+Logger.debug("Hello world!");
 ```
 
 ## Screen Shot
 
 ![](https://github.com/ArsenicSoup/arsenic-logger/raw/master/logger_screenshot.png)
 
+## Options
 
-## Usage
+The following options can be passed in when creating a Logger instance.
 
-There are 5 levels of logging
+| Field | Default | Description |
+| ----- | ------- | ----------- |
+| maxDepth | 3 | The maximum depth of stack trace to display |
+| handleExceptions | false | Catch and log exceptions |
+| apiKey | null | [ArsenicLogger](http://logger.arsenicsoup.com) api key |
+| logConsole | true | Log to the console |
+| logRemote | false | Log to ArsenicLogger |
+| logTag | '' | A tag/label to use for this logger instance. Handy when combined with filtering or using [ArsenicLogger](http://logger.arsenicsoup.com) |
+| echoMemory | false | Echo the current memory usage to the console (if console logging) |
+| echoCPU | false | Echo the CPU usage to the console (if console logging) |
+| locale | 'en' | Set the locale, used for formatting the timestamp |
+| timestampPattern | 'ddd MMM DD h:mm:ss YYYY' | The timestamp pattern, see [Moment.js](http://momentjs.com/docs/#/displaying/) for options |
+| timestamps | true | Echo timestamps to the console, if console logging |
 
-```js 
-log, debug, info, warn, error, fatal
-```
 
-Here is an example of how to use the logger.
+All of these options can also be set through through the following methods;
 
-```js
+### setLabel(label)
 
-Logger = require('arsenic-logger');
+Set the tag/label for the current Logger instance. Very useful when combined with filtering. For example you could set a different tag per module of your code, and then set a filter to only view log outout from a specific module.
 
-Logger.setLevel('debug');
-
-Logger.debug("debug test");
-Logger.info("info test");
-Logger.warn("info test");
-Logger.error("errortest");
-
-var someObject = new Object();
-someObject.name = 'testing';
-someObject.data = [5,6,7,8,9];
-someObject.date = new Date();
-
-Logger.debug("This is an object... ", someObject);
-
-function somefunc(){
-	Logger.debug("testing inside a function");	
-}
-
-var someclass = {
-	test:function(){
-		Logger.debug("Testing inside a class");
-	}
-}
-
-somefunc();
-someclass.test();
-
-Logger.info(someObject);
-
-// A fatal call, that will call process.exit
-Logger.fatal("fatal test");
-
-// Feed uncaught exceptions to the Logger
-Logger.catchExceptions();
-	
-function badFunc(){
-	throw "This is an exception!";	
-}
-
-badFunc();
-
-Logger.debug(variableThatDoesntExist);
-
-```
-
-## [NEW] Timestamps
-
-The method, `setTimestamp` turns time stamps on for the logger
-
-### Turn on time stamps
-
-You can turn on timestamps using the following;
-
-```js
-// Turn timestamps on
-Logger.echoTimestamps(true);
-
-// Example output
-// [Tue Oct 9:40:24 2014] testing inside a function  {from line 35 of test.js ...
-
-// Turn time stamps off
-Logger.echoTimestamps(false);
-```
-
-### Set the time format
-
-You can set the timestamp format using the following command. Internally the Logger uses the [moment](http://momentjs.com/) library and so supports any format supported by moment, you can see the supported formats [here](http://momentjs.com/docs/#/displaying/format/).
-
-As a convenience, this also turns timestamps on, so no need to call `echoTimestaps(true)`.
-
-```js
-// Set timestamp format
-Logger.setTimestampFormat('ddd, hA');
-
-// Example output 
-//[Tue, 9AM] [debug] testing inside a function  {from line 36 of test.js ...
-```
-
-### Set the time locale
-
-The Logger supports any localed support by [moment](http://momentjs.com/), for example 'fr'.
-
-```js
-Logger.setLocale('fr');
-
-// Example output
-// [mar. oct. 10:01:24 2014] [debug] testing inside a function  {from line 37 of test.js ...
-```
-
-## setFilter Filtering Logs
+### setFilter(opts) 
 
 The method `setFilter` can be used to give fine control over what logs are sent to the console. This supports function names, filenames and tags.
 
@@ -146,9 +84,77 @@ Also, you can pass an array or a single string into any of these options. In tha
 Logger.setFilter({tags: ["my-tag", "my-other-tag"]})
 ```
 
+### echoTimestamps(toggle)
+
+Turns time stamps on or off. Only applicable if logging to the console.
+
+```js
+// Turn timestamps on
+Logger.echoTimestamps(true);
+
+// Example output
+// [Tue Oct 9:40:24 2014] testing inside a function  {from line 35 of test.js ...
+
+// Turn time stamps off
+Logger.echoTimestamps(false);
+```
+
+### setTimestampFormat(format)
+
+You can set the timestamp format using the following command. Internally the Logger uses the [moment](http://momentjs.com/) library and so supports any format supported by moment, you can see the supported formats [here](http://momentjs.com/docs/#/displaying/format/).
+
+As a convenience, this also turns timestamps on, so no need to call `echoTimestaps(true)`.
+
+```js
+// Set timestamp format
+Logger.setTimestampFormat('ddd, hA');
+
+// Example output 
+//[Tue, 9AM] [debug] testing inside a function  {from line 36 of test.js ...
+```
+
+### setLocale(local)
+
+Set the time locale. The Logger supports any localed support by [moment](http://momentjs.com/), for example 'fr'.
+
+```js
+Logger.setLocale('fr');
+
+// Example output
+// [mar. oct. 10:01:24 2014] [debug] testing inside a function  {from line 37 of test.js ...
+```
+
+### echoCPUUsage(toggle)
+
+The Logger can echo cpu usage information to the command line using the following commands, which can be combined. **Note:** the arsenic logger service automatically is sent this information.
+
+```js
+Logger.echoCPUUsage()
+```
+
+In a similar fashion, the current 15 minute average CPU usage is sent to the console, for example;
+
+```sh
+[1.43%  error] errortest  {from line 14 of test.js,......}
+```
+
+### echoMemoryUsage(toggle)
+
+The Logger can echo current memory and cpu usage information to the command line using the following commands, which can be combined. **Note:** the arsenic logger service automatically is sent this information.
+
+```js
+Logger.echoMemoryUsage()
+```
+
+This will add the amount of memory used by the heap *at the time an entry was logged*. For example, the follow result shows the process was consuming 3.16GB of heap space when the `Logger.error("errortest")` method was called.
+
+```sh
+[3.16GB  error] errortest  {from line 14 of test.js....}
+```
+
 ## Tagging
 
-You can add a custom tag and other advanced options by using the 'advanced' version of the logging commands;
+You can over-ride the label used for the logger instance using the following commands. These add a custom tag and other advanced options by using the 'advanced' version of the logging commands;
 
 ```js
     Logger.debugX('tags', 'args');
@@ -199,16 +205,6 @@ This can be particulalry useful for large projects where you want to only see th
 
 ## Remote Logging
 
-### Loggly
-
-The Logger now supports [Loggly](https://www.loggly.com/). It makes use of [node-loggly](https://github.com/nodejitsu/node-loggly) under-the-hood. To use this, call;
-
-```js
-Logger.useLoggly('token', 'subdomain','username','password');
-```
-
-Then all calls will be sent to your loggly account!
-
 ### ArsenicLogger
 
 The Logger supports the cloud logging service offered by ArsenicSoup. To use this service first create an account at ArsenicLogger (http://logger.arsenicsoup.com).
@@ -226,34 +222,6 @@ the ArsenicLogger service, e.g.;
 
 ```js
 Logger.useArsenicLogger('YOUR-API-KEY', 'MY-TAG');
-```
-
-## Memory/CPU Usage
-
-The Logger can echo current memory and cpu usage information to the command line using the following commands, which can be combined. **Note:** the arsenic logger service automatically is sent this information.
-
-### Memory Usage
-
-```js
-Logger.echoMemoryUsage()
-```
-
-This will add the amount of memory used by the heap *at the time an entry was logged*. For example, the follow result shows the process was consuming 3.16GB of heap space when the `Logger.error("errortest")` method was called.
-
-```sh
-[3.16GB  error] errortest  {from line 14 of test.js....}
-```
-
-### CPU Usage
-
-```js
-Logger.echoCPUUsage()
-```
-
-In a similar fashion, the current 15 minute average CPU usage is sent to the console, for example;
-
-```sh
-[1.43%  error] errortest  {from line 14 of test.js,......}
 ```
 
 ## Requirements
@@ -275,6 +243,65 @@ For a more full featured logger, check out [tracer](https://github.com/baryon/tr
 If you like this, and use it, please consider donating to help support future development.
 
 <a class="coinbase-button" data-code="1f955f58582ddd191e84a8bb8fcd7a77" data-button-style="donation_small" href="https://coinbase.com/checkouts/1f955f58582ddd191e84a8bb8fcd7a77">Donate Bitcoins</a><script src="https://coinbase.com/assets/button.js" type="text/javascript"></script>
+
+## Example Usage
+
+There are 5 levels of logging
+
+```js 
+log, debug, info, warn, error, fatal
+```
+
+Here is an example of how to use the logger.
+
+```js
+
+Logger = require('arsenic-logger');
+
+Logger.setLevel('debug');
+
+Logger.debug("debug test");
+Logger.info("info test");
+Logger.warn("info test");
+Logger.error("errortest");
+
+var someObject = new Object();
+someObject.name = 'testing';
+someObject.data = [5,6,7,8,9];
+someObject.date = new Date();
+
+Logger.debug("This is an object... ", someObject);
+
+function somefunc(){
+    Logger.debug("testing inside a function");  
+}
+
+var someclass = {
+    test:function(){
+        Logger.debug("Testing inside a class");
+    }
+}
+
+somefunc();
+someclass.test();
+
+Logger.info(someObject);
+
+// A fatal call, that will call process.exit
+Logger.fatal("fatal test");
+
+// Feed uncaught exceptions to the Logger
+Logger.catchExceptions();
+    
+function badFunc(){
+    throw "This is an exception!";  
+}
+
+badFunc();
+
+Logger.debug(variableThatDoesntExist);
+
+```
 
 ## Suggestions
 
