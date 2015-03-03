@@ -56,6 +56,14 @@ The following options can be passed in when creating a Logger instance.
 
 All of these options can also be set through through the following methods;
 
+### setLevel(level)
+
+Set the log level for this Logger instance. Options are; `debug`, `info`, `warn`, `error`, `fatal`.
+
+### setGlobalLevel(level)
+
+Set the log level for *all* logger instances. This will over-ride the log level on all Logger instances.
+
 ### setLabel(label)
 
 Set the tag/label for the current Logger instance. Very useful when combined with filtering. For example you could set a different tag per module of your code, and then set a filter to only view log outout from a specific module.
