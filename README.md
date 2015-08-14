@@ -19,6 +19,26 @@ var Logger = require('arsenic-logger');
 
 // Start using
 Logger.debug("Hello world!");
+
+```
+
+## Advanced Usage
+
+```js
+// Get a default logger instance
+var Logger = require('arsenic-logger');
+
+// Set some more advanced options
+Logger.echoCPUUsage();
+Logger.echoMemoryUsage();
+Logger.setTimestampFormat('ddd, hA');
+Logger.setLocale('fr');
+
+// Beam your logs to papertrail (https://papertrailapp.com)
+Logger.setTransport({name:'papertrail', host:'logs.papertrailapp.com', port'1234'});
+
+// Filter log out to a function in a specific Filter
+Logger.setFilter({functions:"somefunc", files:"test.js"})
 ```
 
 ## Screen Shot
@@ -230,27 +250,6 @@ Here, because the level was set to `debug` and a the filter was set to the tag "
 
 This can be particulalry useful for large projects where you want to only see the logs from a specific section of code at a time.
 
-## Remote Logging
-
-### ArsenicLogger
-
-The Logger supports the cloud logging service offered by ArsenicSoup. To use this service first create an account at ArsenicLogger (http://logger.arsenicsoup.com).
-
-Once you have an account, you will be given a API key. With this, you can now setup this Logger class to send log reports from your server to the ArsenicLogger service.
-
-Then simply setup the Logger like so;
-
-```js
-Logger.useArsenicLogger('YOUR-API-KEY');
-```
-
-You can also specify a custom tag to assign to all subsequent logging calls to help with searching and categorizing on
-the ArsenicLogger service, e.g.;
-
-```js
-Logger.useArsenicLogger('YOUR-API-KEY', 'MY-TAG');
-```
-
 ## Requirements
 
 Requires the excellent callsite module (https://github.com/visionmedia/callsite)
@@ -263,7 +262,7 @@ npm install path
 
 ## Advanced
 
-For a more full featured logger, check out [tracer](https://github.com/baryon/tracer).
+For a more full featured logger, check out [winston](https://github.com/winstonjs/winston).
 
 ## Donate
 
