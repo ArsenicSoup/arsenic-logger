@@ -44,8 +44,6 @@ The following options can be passed in when creating a Logger instance.
 | maxDepth | 3 | The maximum depth of stack trace to display |
 | handleExceptions | false | Catch and log exceptions |
 | apiKey | null | [ArsenicLogger](http://logger.arsenicsoup.com) api key |
-| logConsole | true | Log to the console |
-| logRemote | false | Log to ArsenicLogger |
 | logTag | '' | A tag/label to use for this logger instance. Handy when combined with filtering or using [ArsenicLogger](http://logger.arsenicsoup.com) |
 | echoMemory | false | Echo the current memory usage to the console (if console logging) |
 | echoCPU | false | Echo the CPU usage to the console (if console logging) |
@@ -55,6 +53,37 @@ The following options can be passed in when creating a Logger instance.
 
 
 All of these options can also be set through through the following methods;
+
+### setTransport
+
+By default the logger logs to the console, however you can specify the transport(s) you wish to use.
+
+#### Console
+
+The default choice, but you can enable using;
+
+```js
+Logger.setTransport({name:'console'});
+```
+
+#### PaperTrail
+
+To enable PaperTrail, you need to specify the host and port number given to you by papertrail.
+
+```js
+Logger.setTransport({name:'papertrail', host:'logs.papertrailapp.com', port'1234'});
+```
+
+#### Multiple transports
+
+You can use more than one transports by simply passing an array of transport options, for example to use the console **and** papertrail you can do the following;
+
+```js
+Logger.setTransport([
+    {name:'console'},
+    {name:'papertrail', host:'logs.papertrailapp.com', port'1234'}
+]);
+```
 
 ### setLevel(level)
 
@@ -68,7 +97,7 @@ Set the log level for *all* logger instances. This will over-ride the log level 
 
 Set the tag/label for the current Logger instance. Very useful when combined with filtering. For example you could set a different tag per module of your code, and then set a filter to only view log outout from a specific module.
 
-### setFilter(opts) 
+### setFilter(opts)
 
 The method `setFilter` can be used to give fine control over what logs are sent to the console. This supports function names, filenames and tags.
 
@@ -117,7 +146,7 @@ As a convenience, this also turns timestamps on, so no need to call `echoTimesta
 // Set timestamp format
 Logger.setTimestampFormat('ddd, hA');
 
-// Example output 
+// Example output
 //[Tue, 9AM] [debug] testing inside a function  {from line 36 of test.js ...
 ```
 
@@ -171,8 +200,8 @@ You can over-ride the label used for the logger instance using the following com
     Logger.errorX('tags', 'args');
     Logger.fatalX('tags', 'args');
 ```
- 
-Where `tags` includes custom tags. The other `args` are the same as the basic version of the Logging commands. 
+
+Where `tags` includes custom tags. The other `args` are the same as the basic version of the Logging commands.
 
 `tags` can be either a string, or an array of strings. e.g. ```'TestTag'``` or ```['This','Or','That']``` where it will match on any of the tags in the array.
 
@@ -207,7 +236,7 @@ Logger.debug("This is an object... ", someObject, anotherObject);
 Logger.debugX("TestTag", "This is an object, but using a custom tag... ", someObject);
 ```
 
-Here, because the level was set to `debug` and a the filter was set to the tag "TestTag" the only output from this would be from the 2nd debug statement. 
+Here, because the level was set to `debug` and a the filter was set to the tag "TestTag" the only output from this would be from the 2nd debug statement.
 
 This can be particulalry useful for large projects where you want to only see the logs from a specific section of code at a time.
 
@@ -217,7 +246,7 @@ This can be particulalry useful for large projects where you want to only see th
 
 The Logger supports the cloud logging service offered by ArsenicSoup. To use this service first create an account at ArsenicLogger (http://logger.arsenicsoup.com).
 
-Once you have an account, you will be given a API key. With this, you can now setup this Logger class to send log reports from your server to the ArsenicLogger service. 
+Once you have an account, you will be given a API key. With this, you can now setup this Logger class to send log reports from your server to the ArsenicLogger service.
 
 Then simply setup the Logger like so;
 
@@ -225,7 +254,7 @@ Then simply setup the Logger like so;
 Logger.useArsenicLogger('YOUR-API-KEY');
 ```
 
-You can also specify a custom tag to assign to all subsequent logging calls to help with searching and categorizing on 
+You can also specify a custom tag to assign to all subsequent logging calls to help with searching and categorizing on
 the ArsenicLogger service, e.g.;
 
 ```js
@@ -256,7 +285,7 @@ If you like this, and use it, please consider donating to help support future de
 
 There are 5 levels of logging
 
-```js 
+```js
 log, debug, info, warn, error, fatal
 ```
 
@@ -300,7 +329,7 @@ Logger.fatal("fatal test");
 
 // Feed uncaught exceptions to the Logger
 Logger.catchExceptions();
-    
+
 function badFunc(){
     throw "This is an exception!";  
 }
@@ -317,7 +346,7 @@ Feel free to contact me at mike@arsenicsoup.com if you want to help or have sugg
 
 Thanks!
 
-## License 
+## License
 
 (The MIT License)
 
