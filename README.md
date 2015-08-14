@@ -10,22 +10,12 @@ Simple, easy to read log statements with stack trace in Node.js. There are a few
 npm install arsenic-logger
 ```
 
-**UPGRADING FROM v0.3 to v0.4**
-
-Note that v0.4 contains breaking changes over prior versions - the way the Logger is setup has changed. See basic usage below.
-
 ## Basic Usage
 
 ```js
 
 // Get a default logger instance
-var ArsenicLogger = require('arsenic-logger');
-
-// Create a Logger instance and pass in configuration parameters
-var Logger = new ArsenicLogger({
-    logTag:'MY-TAG',
-    level: 'debug'
-});
+var Logger = require('arsenic-logger');
 
 // Start using
 Logger.debug("Hello world!");
