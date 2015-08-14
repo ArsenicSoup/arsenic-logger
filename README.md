@@ -53,7 +53,6 @@ The following options can be passed in when creating a Logger instance.
 | ----- | ------- | ----------- |
 | maxDepth | 3 | The maximum depth of stack trace to display |
 | handleExceptions | false | Catch and log exceptions |
-| apiKey | null | [ArsenicLogger](http://logger.arsenicsoup.com) api key |
 | logTag | '' | A tag/label to use for this logger instance. Handy when combined with filtering or using [ArsenicLogger](http://logger.arsenicsoup.com) |
 | echoMemory | false | Echo the current memory usage to the console (if console logging) |
 | echoCPU | false | Echo the CPU usage to the console (if console logging) |
