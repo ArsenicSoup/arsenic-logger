@@ -75,6 +75,16 @@ The default choice, but you can enable using;
 Logger.setTransport({name:'console'});
 ```
 
+#### File
+
+Write to a file using the file transport. This guarantees atomic writes and protects against
+race conditions.
+
+```js
+Logger.setTransport({name:'file', filename:'/path/to/your/file.log'});
+```
+
+
 #### PaperTrail
 
 To enable PaperTrail, you need to specify the host and port number given to you by papertrail.
