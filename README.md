@@ -67,13 +67,47 @@ All of these options can also be set through through the following methods;
 
 By default the logger logs to the console, however you can specify the transport(s) you wish to use.
 
-#### Console
+#### Console & Color Theme
 
 The default choice, but you can enable using;
 
 ```js
 Logger.setTransport({name:'console'});
 ```
+
+Additionally, you can specify a custom color scheme;
+
+```js
+var theme = {
+	log: 'grey',
+	info: 'blue',
+	warn: 'magenta',
+	debug: 'blue',
+	error: 'red',
+	fatal: ['red','bold'],
+	exception: ['red','bgWhite'],
+	time: 'dim',
+	trace: 'gray'
+};
+
+Logger.setTransport({name:'console', theme: theme});
+```
+
+Each theme field can be either a single value, or an array of colors and styles taken from the following options;
+
+colors and styles!
+
+##### Text colors
+
+black, red, green, yellow, blue, magenta, cyan, white, gray, grey
+
+##### Background colors
+
+bgBlack, bgRed, bgGreen, bgYellow, bgBlue, bgMagenta, bgCyan, bgWhite
+
+##### Styles
+
+bold, dim, italic, underline, inverse, hidden, strikethrough
 
 #### File
 
