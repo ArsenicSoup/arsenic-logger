@@ -1,6 +1,6 @@
 {
   "name": "arsenic-logger",
-  "version": "0.4.19",
+  "version": "0.4.20",
   "description": "Simple, easy to read log statements with stack trace in Node.js. Now supports the ArsenicLogger cloud logging service.",
   "main": "index.js",
   "dependencies": {
