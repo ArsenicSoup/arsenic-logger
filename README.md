@@ -75,39 +75,25 @@ The default choice, but you can enable using;
 Logger.setTransport({name:'console'});
 ```
 
-Additionally, you can specify a custom color scheme;
+ArsenicLogger uses the excellent [chalk](https://www.npmjs.com/package/chalk) module to colorize the output. You can over-ride the default
+theme by passing your own (see [chalk](https://www.npmjs.com/package/chalk) for options), for example;
 
 ```js
-var theme = {
-	log: 'grey',
-	info: 'blue',
-	warn: 'magenta',
-	debug: 'blue',
-	error: 'red',
-	fatal: ['red','bold'],
-	exception: ['red','bgWhite'],
-	time: 'dim',
-	trace: 'gray'
-};
+var defaultTheme = {
+	log : chalk.black,
+	debug : chalk.green,
+	input : chalk.blue,
+	info : chalk.blue,
+	warn : chalk.yellow,
+	error : chalk.red,
+	fatal : chalk.bold.red,
+	exception : chalk.bold.white.bgRed,
+	time : chalk.gray,
+	trace : chalk.gray
+},
 
-Logger.setTransport({name:'console', theme: theme});
+Logger.setTransport({name:'console', theme: defaultTheme});
 ```
-
-Each theme field can be either a single value, or an array of colors and styles taken from the following options;
-
-colors and styles!
-
-##### Text colors
-
-black, red, green, yellow, blue, magenta, cyan, white, gray, grey
-
-##### Background colors
-
-bgBlack, bgRed, bgGreen, bgYellow, bgBlue, bgMagenta, bgCyan, bgWhite
-
-##### Styles
-
-bold, dim, italic, underline, inverse, hidden, strikethrough
 
 #### File
 
