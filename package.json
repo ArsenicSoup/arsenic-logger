@@ -1,15 +1,13 @@
 {
   "name": "arsenic-logger",
-  "version": "0.5.11",
-  "description": "Simple, easy to read log statements with stack trace in Node.js. Now supports the ArsenicLogger cloud logging service.",
+  "version": "1.0.0",
+  "description": "Simple, easy to read log statements with stack trace in Node.js.",
   "main": "index.js",
   "dependencies": {
-    "callsite": "1.0.0",
-    "chalk": "^1.1.3",
-    "graceful-fs": "^4.1.4",
-    "lodash": "x",
-    "moment": "^2.8.3",
-    "needle": "x"
+    "callsite": "^1.0.0",
+    "chalk": "^2.4.2",
+    "moment": "^2.24.0",
+    "winston": "^3.2.1"
   },
   "repository": {
     "type": "git",
@@ -18,7 +16,7 @@
   "keywords": [
     "logger",
     "stack trace",
-    "cloud logging",
+    "winston",
     "color"
   ],
   "author": "Mike Pritchard (mike@arsenicsoup.com)",
