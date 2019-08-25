@@ -199,7 +199,6 @@ const Logger = {
         let trace_str = ''
         let depth = 1
         let startDepth = 9999
-        const maxDepth = 6
 
         if (stackObj){
 
@@ -226,7 +225,7 @@ const Logger = {
                     if (depth == startDepth){
                         trace_str += " {from line " + no + " of " + fname + funcname;
                     }
-                    else if (no && depth > startDepth && depth <= startDepth + maxDepth){
+                    else if (no && depth > startDepth && depth <= startDepth + Logger.settings.maxDepth){
                         //trace_str += ", called from line " + no + " of " + fname + funcname;
                         trace_str += ", line " + no + " of " + fname + funcname;
                     }
