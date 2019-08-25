@@ -218,7 +218,7 @@ const Logger = {
                         funcname = '';
                     }
 
-                    if (fname == 'Logger.js') {
+                    if (fname == 'index.js') {
                         startDepth = depth+1
                     }
 
